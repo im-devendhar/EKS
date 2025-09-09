@@ -81,23 +81,23 @@ eksctl version
 
 # Create an EKS Cluster with Fargate using `eksctl`
 
-This guide explains how to create an Amazon EKS (Elastic Kubernetes Service) cluster using `eksctl` with Fargate enabled.
+Create an Amazon EKS (Elastic Kubernetes Service) cluster using `eksctl` with Fargate enabled.
 
-## 📋 Prerequisites
+##  Prerequisites
 
 Before running the command, ensure the following:
 
-- ✅ `eksctl` is installed  
+-  `eksctl` is installed  
   ```bash
   eksctl version
   ```
 
-- ✅ AWS CLI is configured  
+-  AWS CLI is configured  
   ```bash
   aws configure
   ```
 
-- ✅ You have sufficient IAM permissions to create EKS clusters and Fargate profiles.
+-  You have sufficient IAM permissions to create EKS clusters and Fargate profiles.
 
 ##  Command to Create Cluster
 
@@ -119,6 +119,11 @@ eksctl create cluster --name demo-cluster --region us-east-1 --fargate
 - Fargate profiles are created for default namespaces like `default` and `kube-system`.
 
 - Once the cluster is created:
+
+<img width="932" height="305" alt="{51D6C59E-436E-4CBE-B44B-07EFD85B641C}" src="https://github.com/user-attachments/assets/e502a3a6-df56-4a4e-a497-6fca85546323" />
+<img width="785" height="103" alt="{7A0D60CB-D43A-4164-B0D5-63DC72905A9F}" src="https://github.com/user-attachments/assets/b0283ffe-75a9-45fc-9a24-b87987eae87e" />
+<img width="760" height="225" alt="{9666036F-BB89-4ECF-B53D-EB2D639D806F}" src="https://github.com/user-attachments/assets/97f5146a-c699-42ac-9a44-1454614d44e7" />
+<img width="931" height="340" alt="{084BF4FA-7B6B-4A94-8DBE-4DA6E9F47DA0}" src="https://github.com/user-attachments/assets/ed111b95-3756-44d5-b796-59e4ccc403ef" />
 
 1. Configure `kubectl` to interact with the cluster:
    ```bash
@@ -149,11 +154,6 @@ This confirms that your kubeconfig was successfully updated and you can now inte
 ---
 
 2. Deploy workloads — they will automatically run on Fargate.
-##  Next Steps
-<img width="932" height="305" alt="{51D6C59E-436E-4CBE-B44B-07EFD85B641C}" src="https://github.com/user-attachments/assets/e502a3a6-df56-4a4e-a497-6fca85546323" />
-<img width="785" height="103" alt="{7A0D60CB-D43A-4164-B0D5-63DC72905A9F}" src="https://github.com/user-attachments/assets/b0283ffe-75a9-45fc-9a24-b87987eae87e" />
-<img width="760" height="225" alt="{9666036F-BB89-4ECF-B53D-EB2D639D806F}" src="https://github.com/user-attachments/assets/97f5146a-c699-42ac-9a44-1454614d44e7" />
-<img width="931" height="340" alt="{084BF4FA-7B6B-4A94-8DBE-4DA6E9F47DA0}" src="https://github.com/user-attachments/assets/ed111b95-3756-44d5-b796-59e4ccc403ef" />
 
 
 
