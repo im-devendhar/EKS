@@ -131,20 +131,19 @@ eksctl create cluster --name demo-cluster --region us-east-1 --fargate
 <img width="785" height="103" alt="{7A0D60CB-D43A-4164-B0D5-63DC72905A9F}" src="https://github.com/user-attachments/assets/b0283ffe-75a9-45fc-9a24-b87987eae87e" />
 <img width="760" height="225" alt="{9666036F-BB89-4ECF-B53D-EB2D639D806F}" src="https://github.com/user-attachments/assets/97f5146a-c699-42ac-9a44-1454614d44e7" />
 
- API (Application Programming Interface)
+**API (Application Programming Interface)**
 A set of rules that allows software components to communicate.
 EKS API Server Endpoint Example:
-
 https://<cluster-id>.gr7.us-east-1.eks.amazonaws.com
- ARN (Amazon Resource Name)
+
+ **ARN (Amazon Resource Name)**
 A unique identifier for AWS resources.
 Example:
-
 arn:aws:eks:us-east-1:<account-id>:cluster/demo-cluster
- OpenID Connect (OIDC)
+
+ **OpenID Connect (OIDC)**
 An authentication protocol used by EKS to associate IAM roles with Kubernetes service accounts.
 OIDC Provider URL Example:
-
 https://oidc.eks.us-east-1.amazonaws.com/id/<unique-id>
 
 
