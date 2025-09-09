@@ -78,3 +78,67 @@ eksctl version
 | `eksctl`   | Create and manage EKS clusters |
 
 ---
+
+# Create an EKS Cluster with Fargate using `eksctl`
+
+This guide explains how to create an Amazon EKS (Elastic Kubernetes Service) cluster using `eksctl` with Fargate enabled.
+
+## 📋 Prerequisites
+
+Before running the command, ensure the following:
+
+- ✅ `eksctl` is installed  
+  ```bash
+  eksctl version
+  ```
+
+- ✅ AWS CLI is configured  
+  ```bash
+  aws configure
+  ```
+
+- ✅ You have sufficient IAM permissions to create EKS clusters and Fargate profiles.
+
+##  Command to Create Cluster
+
+```bash
+eksctl create cluster --name demo-cluster --region us-east-1 --fargate
+```
+
+###  Command Breakdown
+
+- `create cluster`: Initiates the creation of a new EKS cluster.
+- `--name demo-cluster`: Names the cluster `demo-cluster`.
+- `--region us-east-1`: Specifies the AWS region.
+- `--fargate`: Enables Fargate, allowing pods to run without managing EC2 instances.
+
+##  What Happens When You Run This
+
+- A new VPC is created (unless specified otherwise).
+- The EKS control plane is set up.
+- Fargate profiles are created for default namespaces like `default` and `kube-system`.
+
+##  Next Steps
+
+Once the cluster is created:
+
+1. Configure `kubectl` to interact with the cluster:
+   ```bash
+   aws eks --region us-east-1 update-kubeconfig --name demo-cluster
+   ```
+
+2. Deploy workloads — they will automatically run on Fargate.
+
+##  Optional: Custom Fargate Profile
+
+To run workloads in a custom namespace, you can create a Fargate profile like this:
+
+```bash
+eksctl create fargateprofile \
+  --cluster demo-cluster \
+  --name custom-profile \
+  --namespace my-namespace
+```
+
+---
+
