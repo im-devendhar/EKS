@@ -117,8 +117,9 @@ eksctl create cluster --name demo-cluster --region us-east-1 --fargate
 - A new VPC is created (unless specified otherwise).
 - The EKS control plane is set up.
 - Fargate profiles are created for default namespaces like `default` and `kube-system`.
-
 ##  Next Steps
+<img width="932" height="305" alt="{51D6C59E-436E-4CBE-B44B-07EFD85B641C}" src="https://github.com/user-attachments/assets/e502a3a6-df56-4a4e-a497-6fca85546323" />
+<img width="785" height="103" alt="{7A0D60CB-D43A-4164-B0D5-63DC72905A9F}" src="https://github.com/user-attachments/assets/b0283ffe-75a9-45fc-9a24-b87987eae87e" />
 
 Once the cluster is created:
 
