@@ -3,13 +3,13 @@
 
 ---
 
-# 🚀 Devendhar's EKS & Kubernetes Setup Guide (Ubuntu EC2)
+#  EKS & Kubernetes Setup Guide (Ubuntu EC2)
 
 Steps taken to set up `kubectl`, `aws cli`, and `eksctl` on an Ubuntu EC2 instance for working with Amazon EKS.
 
 ---
 
-## 🔹 1. Install `kubectl` (Kubernetes CLI)
+##  1. Install `kubectl` (Kubernetes CLI)
 
 `kubectl` is the command-line tool used to interact with Kubernetes clusters.
 
@@ -23,7 +23,7 @@ kubectl version --client
 
 ---
 
-## 🔹 2. Configure AWS CLI
+##  2. Configure AWS CLI
 
 Used to authenticate and interact with AWS services.
 
@@ -40,7 +40,7 @@ You’ll be prompted to enter:
 
 ---
 
-## 🔹 3. Fix `kubectl` Error: "The connection to the server localhost:8080 was refused"
+##  3. Fix `kubectl` Error: "The connection to the server localhost:8080 was refused"
 
 This happens because `kubectl` was trying to connect to a Kubernetes cluster on localhost, which doesn’t exist.
 
@@ -56,7 +56,7 @@ aws eks --region ap-south-1 update-kubeconfig --name my-eks-cluster
 
 ---
 
-## 🔹 4. Install `eksctl`
+##  4. Install `eksctl`
 
 `eksctl` is used to create and manage EKS clusters.
 
@@ -69,7 +69,7 @@ eksctl version
 
 ---
 
-## 🔁 Tool Summary
+##  Tool Summary
 
 | Tool       | Purpose |
 |------------|---------|
