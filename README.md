@@ -213,6 +213,41 @@ eksctl create fargateprofile \
 | Simplified scaling   | AWS handles provisioning automatically|
 
 
+<img width="563" height="129" alt="{CBC9CFA9-5DB6-4B31-B931-1B9522F1D053}" src="https://github.com/user-attachments/assets/f2a756ed-9e77-4857-90b5-3c72d5faca00" />
+<img width="943" height="372" alt="image" src="https://github.com/user-attachments/assets/69afb2cd-dade-4bfd-bb3d-254447d4c977" />
+When you are deploying the application on EC2 instance you can avoid this step, anyway thats a different case.
+
+You can verify the profile creation using:
+
+```bash
+aws eks describe-fargate-profiles \
+  --cluster-name demo-cluster \
+  --region us-east-1
+
+```
+# 2048 App
+
+## Create Fargate profile
+
+```
+eksctl create fargateprofile \
+    --cluster demo-cluster \
+    --region us-east-1 \
+    --name alb-sample-app \
+    --namespace game-2048
+```
+
+## Deploy the deployment, service and Ingress
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
+```
+
+
+
+![Screenshot 2023-08-03 at 7 57 15 PM](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/93b06a9f-67f9-404f-b0ad-18e3095b7353)
+
+
 
 ---
 
