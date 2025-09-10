@@ -244,7 +244,6 @@ aws eks describe-fargate-profiles \
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
 
 ```
-Here’s a clean and well-structured **README section** you can include in your project to document how you configured the IAM OIDC provider for your EKS cluster after enabling Fargate:
 
 ---
 
@@ -304,17 +303,16 @@ eksctl utils associate-iam-oidc-provider \
 - Essential for workloads that interact with services like S3, DynamoDB, Secrets Manager, etc.
 
 ---
-Here’s the updated **README section** with the **Helm install step** clearly included:
 
 ---
 
-## 🚀 Setting Up AWS Load Balancer Controller (ALB Add-On)
+##  Setting Up AWS Load Balancer Controller (ALB Add-On)
 
 This guide walks through the steps to install the AWS Load Balancer Controller in an EKS cluster (`demo-cluster`) with Fargate support.
 
 ---
 
-### 📦 Step 1: Download IAM Policy
+###  Step 1: Download IAM Policy
 
 ```bash
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
@@ -322,7 +320,7 @@ curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-cont
 
 ---
 
-### 🔐 Step 2: Create IAM Policy
+###  Step 2: Create IAM Policy
 
 ```bash
 aws iam create-policy \
@@ -332,7 +330,7 @@ aws iam create-policy \
 
 ---
 
-### 🔧 Step 3: Create IAM Role and Kubernetes Service Account
+###  Step 3: Create IAM Role and Kubernetes Service Account
 
 ```bash
 eksctl create iamserviceaccount \
@@ -390,8 +388,12 @@ You should see the controller running successfully.
 
 
 <img width="732" height="74" alt="{A3A3C6D2-1FD4-4809-A309-639DDC05925E}" src="https://github.com/user-attachments/assets/68242f60-c402-4d2d-92c2-f1ba6a705ed2" />
+
 <img width="664" height="70" alt="{07010085-5288-4D5C-ACB1-37C67374A33D}" src="https://github.com/user-attachments/assets/022d4ff8-a016-4793-abb0-c4a394bebfcb" />
+
 Use the highlighted link to access the deployed application.
+
+<img width="960" height="465" alt="{BA7920AA-D7D8-4BC3-A251-541D412A61EE}" src="https://github.com/user-attachments/assets/97cc2d34-3fa7-4098-a67a-3d0c39255d53" />
 
 ## Use the below rep link for clear understanding 
 
