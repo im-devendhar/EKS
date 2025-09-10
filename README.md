@@ -242,9 +242,160 @@ aws eks describe-fargate-profiles \
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
+
+```
+Here’s a clean and well-structured **README section** you can include in your project to document how you configured the IAM OIDC provider for your EKS cluster after enabling Fargate:
+
+---
+
+##  Configuring IAM OIDC Provider for EKS (Fargate-Compatible)
+
+To enable **IAM Roles for Service Accounts (IRSA)** in your EKS cluster (`demo-cluster`), follow these steps to configure the IAM OIDC provider.
+
+---
+
+###  Step 1: Set Cluster Name
+
+```bash
+export cluster_name=demo-cluster
 ```
 
+---
 
+###  Step 2: Extract OIDC ID from Cluster
+
+```bash
+oidc_id=$(aws eks describe-cluster \
+  --name $cluster_name \
+  --query "cluster.identity.oidc.issuer" \
+  --output text | cut -d '/' -f 5)
+```
+
+---
+
+###  Step 3: Check if OIDC Provider Already Exists
+
+```bash
+aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
+```
+
+If the output is empty, it means the IAM OIDC provider is **not yet configured**.
+
+---
+
+###  Step 4: Associate IAM OIDC Provider
+
+```bash
+eksctl utils associate-iam-oidc-provider \
+  --cluster $cluster_name \
+  --region us-east-1 \
+  --approve
+```
+
+ This step enables IRSA, which is **required for Fargate profiles** to securely access AWS services without using long-lived credentials.
+
+---
+
+###  Why OIDC Is Important in EKS (Especially with Fargate)
+
+- **Fargate pods do not run on EC2 nodes**, so you can't attach IAM roles to nodes.
+- OIDC enables **secure, fine-grained access** to AWS services via service accounts.
+- It allows pods to assume IAM roles using **short-lived credentials** via AWS STS.
+- Essential for workloads that interact with services like S3, DynamoDB, Secrets Manager, etc.
+
+---
+Here’s the updated **README section** with the **Helm install step** clearly included:
+
+---
+
+## 🚀 Setting Up AWS Load Balancer Controller (ALB Add-On)
+
+This guide walks through the steps to install the AWS Load Balancer Controller in an EKS cluster (`demo-cluster`) with Fargate support.
+
+---
+
+### 📦 Step 1: Download IAM Policy
+
+```bash
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
+```
+
+---
+
+### 🔐 Step 2: Create IAM Policy
+
+```bash
+aws iam create-policy \
+  --policy-name AWSLoadBalancerControllerIAMPolicy \
+  --policy-document file://iam_policy.json
+```
+
+---
+
+### 🔧 Step 3: Create IAM Role and Kubernetes Service Account
+
+```bash
+eksctl create iamserviceaccount \
+  --cluster=demo-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::<your-aws-account-id>:policy/AWSLoadBalancerControllerIAMPolicy \
+  --region=us-east-1 \
+  --approve
+```
+
+> Replace `<your-aws-account-id>` with your actual AWS account ID.
+
+---
+
+### 📥 Step 4: Deploy AWS Load Balancer Controller via Helm
+
+#### Add the EKS Helm chart repository:
+
+```bash
+helm repo add eks https://aws.github.io/eks-charts
+```
+
+#### Update the repo:
+
+```bash
+helm repo update
+```
+
+#### Install the controller:
+
+```bash
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system \
+  --set clusterName=demo-cluster \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set region=us-east-1 \
+  --set vpcId=<your-vpc-id>
+```
+
+> Replace `<your-vpc-id>` with the VPC ID of your EKS cluster.
+
+---
+
+### ✅ Step 5: Verify Deployment
+
+```bash
+kubectl get deployment -n kube-system aws-load-balancer-controller
+```
+
+You should see the controller running successfully.
+
+---
+
+
+<img width="732" height="74" alt="{A3A3C6D2-1FD4-4809-A309-639DDC05925E}" src="https://github.com/user-attachments/assets/68242f60-c402-4d2d-92c2-f1ba6a705ed2" />
+<img width="664" height="70" alt="{07010085-5288-4D5C-ACB1-37C67374A33D}" src="https://github.com/user-attachments/assets/022d4ff8-a016-4793-abb0-c4a394bebfcb" />
+Use the highlighted link to access the deployed application.
+
+## Use the below rep link for clear understanding 
+
+https://github.com/im-devendhar/aws-devops-zero-to-hero/blob/main/day-22
 
 ![Screenshot 2023-08-03 at 7 57 15 PM](https://github.com/iam-veeramalla/aws-devops-zero-to-hero/assets/43399466/93b06a9f-67f9-404f-b0ad-18e3095b7353)
 
