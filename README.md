@@ -202,6 +202,17 @@ eksctl create fargateprofile \
 - Ensures all pods in `my-namespace` run on Fargate.
 
 ---
+# 2048 App
+
+## Create Fargate profile
+```
+eksctl create fargateprofile \
+    --cluster demo-cluster \
+    --region us-east-1 \
+    --name alb-sample-app \
+    --namespace game-2048
+```
+
 
 ###  Summary
 
@@ -225,17 +236,7 @@ aws eks describe-fargate-profiles \
   --region us-east-1
 
 ```
-# 2048 App
 
-## Create Fargate profile
-
-```
-eksctl create fargateprofile \
-    --cluster demo-cluster \
-    --region us-east-1 \
-    --name alb-sample-app \
-    --namespace game-2048
-```
 
 ## Deploy the deployment, service and Ingress
 
